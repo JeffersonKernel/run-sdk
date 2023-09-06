@@ -83,7 +83,7 @@ if (!fs.existsSync(nameCachePath)) {
 
 // Plugin to save the name cache if it differs from the last known name cache
 class SaveNameCachePlugin {
-  apply (compiler) {
+  apply(compiler) {
     compiler.hooks.done.tap(SaveNameCachePlugin.name, () => {
       const newNameCacheJson = JSON.stringify(nameCache)
       if (newNameCacheJson !== lastNameCacheJson) {
@@ -96,7 +96,7 @@ class SaveNameCachePlugin {
 
 // Plugin to wait for the name cache file to be saved
 class WaitForNameCachePlugin {
-  apply (compiler) {
+  apply(compiler) {
     compiler.hooks.run.tapAsync(WaitForNameCachePlugin.name, async (compiler, callback) => {
       const start = new Date()
       const timeout = 30000
@@ -140,7 +140,7 @@ const terserPluginConfig = {
 const browserMin = {
   entry,
   output: {
-    filename: `${name}.browser.min.js`,
+    filename: `${name}.${pkg.version}.browser.min.js`,
     path: dist,
     library,
     libraryTarget: 'umd'
@@ -169,7 +169,7 @@ const nodeMin = {
   ...browserMin,
   target: 'node',
   output: {
-    filename: `${name}.node.min.js`,
+    filename: `${name}.${pkg.version}.node.min.js`,
     path: dist,
     libraryTarget: 'commonjs2'
   },
@@ -187,7 +187,7 @@ const nodeMin = {
 const browser = {
   ...browserMin,
   output: {
-    filename: `${name}.browser.js`,
+    filename: `${name}.${pkg.version}.browser.js`,
     path: dist,
     library
   },
@@ -202,7 +202,7 @@ const browser = {
 const node = {
   ...nodeMin,
   output: {
-    filename: `${name}.node.js`,
+    filename: `${name}.${pkg.version}.node.js`,
     path: dist,
     libraryTarget: 'commonjs2'
   },
@@ -223,7 +223,7 @@ if (!entries.length) throw new Error(`No test files found: ${patterns}`)
 const browserTests = {
   target: 'web',
   entry: entries,
-  output: { filename: `${name}.browser.tests.js`, path: dist },
+  output: { filename: `${name}.${pkg.version}.browser.tests.js`, path: dist },
   node: { fs: 'empty' },
   externals: { mocha: 'mocha.Mocha', chai: 'chai', jsdom: 'jsdom', bsv: 'bsv', target: library },
   optimization: { minimize: false },

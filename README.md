@@ -1,14 +1,26 @@
-# RUN SDK - 0.6.41 beta
+# RUN SDK - 0.6.42 beta
 
-[![tests](https://github.com/runonbitcoin/run/workflows/tests/badge.svg)](https://github.com/runonbitcoin/run/actions) [![codecov](https://codecov.io/gh/runonbitcoin/run/branch/master/graph/badge.svg?token=VPXTBV9CQP)](https://codecov.io/gh/runonbitcoin/run)
+[![tests](https://github.com/runcraft-bitcoin/run-sdk/workflows/tests/badge.svg)](https://github.com/runcraft-bitcoin/run-sdk/actions) [![codecov](https://codecov.io/gh/runcraft-bitcoin/run-sdk/branch/master/graph/badge.svg?token=VPXTBV9CQP)](https://codecov.io/gh/runcraft-bitcoin/run-sdk/)
 
-**Note: This project is no longer supported. The repository exists for reference only.**
+**Note: This project is only lightly supported with limited ressources for now by the team at https://runcraft.io. Feel free to contribute.**
+
 
 RUN is a token protocol to build whatever you dream up. A world of interactive apps and tokens.
 
-To give it a go, visit https://run.network for tutorials and docs.
+To give it a go, visit https://wiki.runcraft.io/ for tutorials and docs.
+
+## Versions and migrations
+
+### version 0.6.42
+
+- removes support for Run Connect API which was configured as default and got deprecated. It was replaced with the whatsonchain API as default, be aware that they have rate limits.
+
+**migration guide:** this means you cannot pass "run" as the api config anymore, or you will get an error. Instead you can just remove it to use the default, pass "whatsonchain" or use a custom api of your own.
 
 ## Installation
+
+We recommend using `nvm` to have the proper node version. Run-SDK requires Node 16 or higher.
+Check with `node --version`, and for example switch with `nvm use 16.20.2`.
 
 Run `npm install` to install node dependencies.
 
@@ -16,11 +28,11 @@ Then run `npm run build` to build the browser and node libraries.
 
 ## Community
 
-Join us in our Discord, Run Nation: https://run.network/discord. Here you'll meet other developers using Run, hear about cool projects launching, and know right away when there are new announcements.
+Join us in our Telegram at https://t.me/+sow9kFf8f4Y4ZTg0. Here you'll meet other developers using Run, hear about cool projects launching, and know right away when there are new announcements.
 
 ## Getting Help
 
-Post what's on your mind in the "ask-for-help" channel in the Run Nation Discord.
+Post what's on your mind in the telegram channel.
 
 ## Commands
 
@@ -42,7 +54,7 @@ Various environment variables may be used to configure the tests:
 | `BROWSER`         | Browser used for testing                        | `chrome`, `firefox`, `safari`, `MicrosoftEdge` | `chrome`    |
 | `STRESS`          | Whether to run the stress tests                 | `true`, `false`                                | `false`     |
 | `PURSE_[network]` | Purse key used on a specific network            | your string privkey                            | `undefined` |
-| `API`             | Blockchain API when not using the mock network  | `run`, `whatsonchain`                          | `undefined` |
+| `API`             | Blockchain API when not using the mock network  | `whatsonchain`                          | `undefined` |
 | `APIKEY_[api]`    | API key used with a specific blockchain API     | your string api key                            | `undefined` |
 | `LOGGER`          | Whether to log internal messages to the console | `true`, `false`                                | `false`     |
 

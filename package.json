@@ -1,6 +1,6 @@
 {
   "name": "@runonbitcoin/run",
-  "version": "0.6.41",
+  "version": "0.6.43",
   "description": "Run SDK",
   "license": "MIT",
   "main": "dist/run.node.min.js",
@@ -8,7 +8,7 @@
   "files": [
     "dist/**.min.js"
   ],
-  "repository": "git://github.com/runonbitcoin/run.git",
+  "repository": "git://github.com/runcraft-bitcoin/run-sdk.git",
   "scripts": {
     "lint": "standard --fix",
     "build": "webpack",
