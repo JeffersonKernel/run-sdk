@@ -13,3 +13,6 @@ dist
 
 # Run cache
 .runcache
+
+# others
+.notes
