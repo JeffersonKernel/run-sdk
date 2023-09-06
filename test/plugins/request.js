@@ -30,20 +30,26 @@ describe('request', () => {
   // --------------------------------------------------------------------------
 
   describe('request', () => {
+
+    /* // deprecated but we could replace it with a new service
     it('get returns json', async function () {
       this.timeout(timeout)
       const status = await request('https://api.run.network/v1/test/status', { timeout })
       expect(status.ok).to.equal(true)
     })
+    */
 
     // ------------------------------------------------------------------------
 
+    // deprecated but we could replace it with a new service
+    /*
     it('get returns buffer', async function () {
       this.timeout(timeout)
       const txid = '5332c013476cd2a2c18710a01188695bc27a5ef1748a51d4a5910feb1111dab4'
       const rawtx = await request(`https://api.run.network/v1/main/rawtx/${txid}`, { timeout })
       expect(rawtx.toString('hex').length).to.equal(3184)
     })
+    */
 
     // ------------------------------------------------------------------------
 
@@ -70,10 +76,13 @@ describe('request', () => {
 
     // ------------------------------------------------------------------------
 
+    // deprecated but we could replace it with a new service
+    /*
     it('server error', async function () {
       this.timeout(timeout)
       await expect(request('https://api.run.network/badurl', { timeout })).to.be.rejectedWith(RequestError)
     })
+    */
 
     // ------------------------------------------------------------------------
 
@@ -97,6 +106,8 @@ describe('request', () => {
 
     // ------------------------------------------------------------------------
 
+    // deprecated but we could replace it with a new service
+    /*
     it('response handler', async function () {
       this.timeout(timeout)
       const options = { timeout, cache: 1000, response: stub().returns(100) }
@@ -104,6 +115,7 @@ describe('request', () => {
       expect(await request('https://api.run.network/v1/test/status', options)).to.equal(100)
       expect(options.response.callCount).to.equal(1)
     })
+    */
   })
 
   // ----------------------------------------------------------------------------------------------

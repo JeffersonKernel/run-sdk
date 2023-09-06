@@ -41,6 +41,7 @@ describe('Run', () => {
     // ------------------------------------------------------------------------
 
     describe('api', () => {
+
       it('defaults to undefined default', () => {
         const previousDefault = Run.defaults.api
         try {
@@ -65,9 +66,11 @@ describe('Run', () => {
 
       // ----------------------------------------------------------------------
 
-      it('run', () => {
+      // RunConnect has been deprecated
+      /* it('run', () => {
         expect(new Run({ api: 'run', network: 'main' }).blockchain instanceof RunConnect).to.equal(true)
       })
+      */
 
       // ----------------------------------------------------------------------
 
@@ -77,10 +80,13 @@ describe('Run', () => {
 
       // ----------------------------------------------------------------------
 
+      // RunConnect has been deprecated
+      /*
       it('throws if unsupported', () => {
         expect(() => new Run({ api: 'run', network: 'mock' })).to.throw('"mock" network is not compatible with the "run" api')
         expect(() => new Run({ api: 'run', network: 'stn' })).to.throw('RunConnect API does not support the "stn" network')
       })
+      */
 
       // ----------------------------------------------------------------------
 
@@ -91,6 +97,7 @@ describe('Run', () => {
         expect(() => new Run({ api: 123 })).to.throw('Invalid api: 123')
         expect(() => new Run({ api: 'WhatsOnChain' })).to.throw('Invalid api: "WhatsOnChain"')
       })
+      
     })
 
     // ------------------------------------------------------------------------
@@ -181,10 +188,11 @@ describe('Run', () => {
     // ------------------------------------------------------------------------
 
     describe('blockchain', () => {
+
       it('defaults to api if main', () => {
-        const run = new Run({ api: 'run', network: 'main' })
-        expect(run.blockchain instanceof RunConnect).to.equal(true)
-        expect(run.blockchain.api).to.equal('run')
+        const run = new Run({ api: 'whatsonchain', network: 'main' })
+        expect(run.blockchain instanceof RunConnect).to.equal(false)
+        expect(run.blockchain.api).to.equal('whatsonchain')
         expect(run.blockchain.network).to.equal('main')
       })
 
@@ -208,6 +216,8 @@ describe('Run', () => {
 
       // ----------------------------------------------------------------------
 
+      // RunConnect has been deprecated
+      /*
       it('run', () => {
         const blockchain = new RunConnect()
         const run = new Run({ blockchain })
@@ -218,6 +228,7 @@ describe('Run', () => {
         expect(run.blockchain.api).to.equal('run')
         expect(run.blockchain.apiKey).to.equal(undefined)
       })
+      */
 
       // ----------------------------------------------------------------------
 
@@ -305,8 +316,8 @@ describe('Run', () => {
       // ----------------------------------------------------------------------
 
       it('does not reuse blockchain if different networks', () => {
-        const run = new Run({ api: 'run', network: 'main' })
-        const run2 = new Run({ api: 'run', network: 'test' })
+        const run = new Run({ api: 'whatsonchain', network: 'main' })
+        const run2 = new Run({ api: 'whatsonchain', network: 'test' })
         expect(run.blockchain).not.to.equal(run2.blockchain)
       })
 
@@ -331,11 +342,12 @@ describe('Run', () => {
       // ----------------------------------------------------------------------
 
       it('throws if incompatible settings', () => {
-        expect(() => new Run({ blockchain: new Mockchain(), api: 'run' })).to.throw('Blockchain mismatch with "run" api')
+        // expect(() => new Run({ blockchain: new Mockchain(), api: 'run' })).to.throw('Blockchain mismatch with "run" api')
+        expect(() => new Run({ blockchain: new Mockchain(), api: 'whatsonchain' })).to.throw('Blockchain mismatch with "whatsonchain" api')
         expect(() => new Run({ blockchain: new Mockchain(), apiKey: 'abc' })).to.throw('Blockchain mismatch with "abc" apiKey')
         expect(() => new Run({ blockchain: new Mockchain(), network: 'main' })).to.throw('Blockchain mismatch with "main" network')
         expect(() => new Run({ blockchain: new RunConnect(), network: 'mock' })).to.throw('Blockchain mismatch with "mock" network')
-        expect(() => new Run({ blockchain: new WhatsOnChain(), api: 'run' })).to.throw('Blockchain mismatch with "run" api')
+        // expect(() => new Run({ blockchain: new WhatsOnChain(), api: 'run' })).to.throw('Blockchain mismatch with "run" api')
       })
     })
 
@@ -565,20 +577,21 @@ describe('Run', () => {
     // ------------------------------------------------------------------------
 
     describe('network', () => {
-      it('RunConnect used for main network', () => {
+
+      it('WhatsOnChain used for main network', () => {
         const run = new Run({ network: 'main' })
-        expect(run.blockchain instanceof RunConnect).to.equal(true)
+        expect(run.blockchain instanceof WhatsOnChain).to.equal(true)
         expect(run.state instanceof StateServer).to.equal(true)
-        expect(run.api).to.equal('run')
+        expect(run.api).to.equal('whatsonchain')
       })
 
       // ----------------------------------------------------------------------
 
-      it('RunConnect used for test network', () => {
+      it('WhatsOnChain used for test network', () => {
         const run = new Run({ network: 'test' })
-        expect(run.blockchain instanceof RunConnect).to.equal(true)
+        expect(run.blockchain instanceof WhatsOnChain).to.equal(true)
         expect(run.state instanceof StateServer).to.equal(true)
-        expect(run.api).to.equal('run')
+        expect(run.api).to.equal('whatsonchain')
       })
 
       // ----------------------------------------------------------------------
@@ -1340,6 +1353,9 @@ describe('Run', () => {
     // ------------------------------------------------------------------------
 
     describe('api', () => {
+
+      // runConnect has been deprecated
+      /*
       it('run', () => {
         const run = new Run({ api: 'whatsonchain', network: 'main' })
         run.api = 'run'
@@ -1349,11 +1365,12 @@ describe('Run', () => {
         expect(run.cache instanceof StateServer).to.equal(false)
         expect(run.network).to.equal('main')
       })
+      */
 
       // ----------------------------------------------------------------------
 
       it('whatsonchain', () => {
-        const run = new Run({ api: 'run', network: 'test' })
+        const run = new Run({ network: 'test' })
         run.api = 'whatsonchain'
         expect(run.api).to.equal('whatsonchain')
         expect(run.blockchain instanceof WhatsOnChain).to.equal(true)
@@ -1364,20 +1381,20 @@ describe('Run', () => {
       // ----------------------------------------------------------------------
 
       it('throws if invalid', () => {
-        const run = new Run({ api: 'run', network: 'test' })
+        const run = new Run({ api: 'whatsonchain', network: 'test' })
         expect(() => { run.api = 'mock' }).to.throw('Invalid api: "mock"')
         expect(() => { run.api = 'bad' }).to.throw('Invalid api: "bad"')
         expect(() => { run.api = null }).to.throw('Invalid api: null')
         expect(() => { run.api = 123 }).to.throw('Invalid api: 123')
-        expect(run.api).to.equal('run')
-        expect(run.blockchain instanceof RunConnect).to.equal(true)
+        expect(run.api).to.equal('whatsonchain')
+        expect(run.blockchain instanceof WhatsOnChain).to.equal(true)
         expect(run.network).to.equal('test')
       })
 
       // ----------------------------------------------------------------------
 
       it('change blockchain', () => {
-        const run = new Run({ api: 'run', network: 'main' })
+        const run = new Run({ api: 'whatsonchain', network: 'main' })
         run.blockchain = new Run.plugins.WhatsOnChain()
         expect(run.api).to.equal(undefined)
         run.blockchain = new Run.plugins.RunConnect()

@@ -91,7 +91,7 @@ describe('_check', () => {
     // ----------------------------------------------------------------------
 
     it('node > 16 not supported', () => {
-      const error = 'Run is supported only on Node 16 and below'
+      const error = 'Run is supported only on Node 16 and below, check https://bit.ly/lowernode'
       expect(() => testNodeVersion('v17.0.0')).to.throw(error)
     })
 
