@@ -4,9 +4,18 @@
 
 **Note: This project is only lightly supported with limited ressources for now by the team at https://runcraft.io. Feel free to contribute.**
 
+
 RUN is a token protocol to build whatever you dream up. A world of interactive apps and tokens.
 
 To give it a go, visit https://wiki.runcraft.io/ for tutorials and docs.
+
+## Versions and migrations
+
+### version 0.6.42
+
+- removes support for Run Connect API which was configured as default and got deprecated. It was replaced with the whatsonchain API as default, be aware that they have rate limits.
+
+**migration guide:** this means you cannot pass "run" as the api config anymore, or you will get an error. Instead you can just remove it to use the default, pass "whatsonchain" or use a custom api of your own.
 
 ## Installation
 
