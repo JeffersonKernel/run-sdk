@@ -83,7 +83,7 @@ if (!fs.existsSync(nameCachePath)) {
 
 // Plugin to save the name cache if it differs from the last known name cache
 class SaveNameCachePlugin {
-  apply(compiler) {
+  apply (compiler) {
     compiler.hooks.done.tap(SaveNameCachePlugin.name, () => {
       const newNameCacheJson = JSON.stringify(nameCache)
       if (newNameCacheJson !== lastNameCacheJson) {
@@ -96,7 +96,7 @@ class SaveNameCachePlugin {
 
 // Plugin to wait for the name cache file to be saved
 class WaitForNameCachePlugin {
-  apply(compiler) {
+  apply (compiler) {
     compiler.hooks.run.tapAsync(WaitForNameCachePlugin.name, async (compiler, callback) => {
       const start = new Date()
       const timeout = 30000
