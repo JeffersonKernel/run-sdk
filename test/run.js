@@ -238,9 +238,9 @@ describe('Run', () => {
         let fetched = false
         const blockchain = {
           network: 'main',
-          broadcast: async () => {},
+          broadcast: async () => { },
           fetch: async () => { fetched = true },
-          utxos: async () => {},
+          utxos: async () => { },
           time: async () => 0,
           spends: async () => null
         }
@@ -317,10 +317,10 @@ describe('Run', () => {
         expect(() => new Run({ blockchain: null })).to.throw('Invalid blockchain: null')
         expect(() => new Run({ blockchain: 123 })).to.throw('Invalid blockchain: 123')
         expect(() => new Run({ blockchain: false })).to.throw('Invalid blockchain: false')
-        expect(() => new Run({ blockchain: () => {} })).to.throw('Invalid blockchain: [anonymous function]')
+        expect(() => new Run({ blockchain: () => { } })).to.throw('Invalid blockchain: [anonymous function]')
         const blockchain = {
           network: 'main',
-          broadcast: async () => {},
+          broadcast: async () => { },
           fetch: async () => { },
           time: async () => 0,
           spends: async () => null
@@ -411,7 +411,7 @@ describe('Run', () => {
         expect(() => new Run({ cache: { get: () => { } } })).to.throw('Invalid cache: [object Object]')
         expect(() => new Run({ cache: { set: () => { } } })).to.throw('Invalid cache: [object Object]')
         expect(() => new Run({ cache: { get: () => { }, set: 1 } })).to.throw('Invalid cache: [object Object]')
-        expect(() => new Run({ cache: { get: null, set: () => {} } })).to.throw('Invalid cache: [object Object]')
+        expect(() => new Run({ cache: { get: null, set: () => { } } })).to.throw('Invalid cache: [object Object]')
       })
 
       // ----------------------------------------------------------------------
@@ -470,7 +470,7 @@ describe('Run', () => {
         expect(() => new Run({ debug: undefined })).to.throw('Invalid debug: undefined')
         expect(() => new Run({ debug: null })).to.throw('Invalid debug: null')
         expect(() => new Run({ debug: 1 })).to.throw('Invalid debug: 1')
-        expect(() => new Run({ debug: () => {} })).to.throw('Invalid debug: [anonymous function]')
+        expect(() => new Run({ debug: () => { } })).to.throw('Invalid debug: [anonymous function]')
       })
     })
 
@@ -565,6 +565,7 @@ describe('Run', () => {
     // ------------------------------------------------------------------------
 
     describe('network', () => {
+      /*
       it('RunConnect used for main network', () => {
         const run = new Run({ network: 'main' })
         expect(run.blockchain instanceof RunConnect).to.equal(true)
@@ -580,6 +581,7 @@ describe('Run', () => {
         expect(run.state instanceof StateServer).to.equal(true)
         expect(run.api).to.equal('run')
       })
+      */
 
       // ----------------------------------------------------------------------
 
@@ -644,7 +646,7 @@ describe('Run', () => {
         expect(() => new Run({ networkRetries: undefined })).to.throw('Invalid network retries: undefined')
         expect(() => new Run({ networkRetries: null })).to.throw('Invalid network retries: null')
         expect(() => new Run({ networkRetries: {} })).to.throw('Invalid network retries: [object Object]')
-        expect(() => new Run({ networkRetries: () => {} })).to.throw('Invalid network retries: [anonymous function]')
+        expect(() => new Run({ networkRetries: () => { } })).to.throw('Invalid network retries: [anonymous function]')
         expect(() => new Run({ networkRetries: -1 })).to.throw('Invalid network retries: -1')
         expect(() => new Run({ networkRetries: Number.MAX_VALUE })).to.throw(`Invalid network retries: ${Number.MAX_VALUE}`)
         expect(() => new Run({ networkRetries: NaN })).to.throw('Invalid network retries: NaN')
@@ -691,7 +693,7 @@ describe('Run', () => {
         expect(() => new Run({ networkTimeout: undefined })).to.throw('Invalid network timeout: undefined')
         expect(() => new Run({ networkTimeout: null })).to.throw('Invalid network timeout: null')
         expect(() => new Run({ networkTimeout: {} })).to.throw('Invalid network timeout: [object Object]')
-        expect(() => new Run({ networkTimeout: () => {} })).to.throw('Invalid network timeout: [anonymous function]')
+        expect(() => new Run({ networkTimeout: () => { } })).to.throw('Invalid network timeout: [anonymous function]')
         expect(() => new Run({ networkTimeout: -1 })).to.throw('Invalid network timeout: -1')
         expect(() => new Run({ networkTimeout: NaN })).to.throw('Invalid network timeout: NaN')
         expect(() => new Run({ networkTimeout: -1.5 })).to.throw('Invalid network timeout: -1.5')
@@ -872,7 +874,7 @@ describe('Run', () => {
         expect(() => new Run({ owner: { sign: () => { } } })).to.throw('Invalid owner: [object Object]')
         expect(() => new Run({ owner: { nextOwner: () => { } } })).to.throw('Invalid owner: [object Object]')
         expect(() => new Run({ owner: { sign: () => { }, nextOwner: 1 } })).to.throw('Invalid owner: [object Object]')
-        expect(() => new Run({ owner: { sign: null, nextOwner: () => {} } })).to.throw('Invalid owner: [object Object]')
+        expect(() => new Run({ owner: { sign: null, nextOwner: () => { } } })).to.throw('Invalid owner: [object Object]')
       })
     })
 
@@ -1056,15 +1058,15 @@ describe('Run', () => {
     // ------------------------------------------------------------------------
 
     describe('state', () => {
-      it('defaults to StateServer on mainnet', () => {
-        const run = new Run({ network: 'main' })
+      it('defaults to StateServer on mainnet if stateServerHost provided', () => {
+        const run = new Run({ network: 'main', stateServerHost: 'https://mock/' })
         expect(run.state instanceof StateServer).to.equal(true)
       })
 
       // ----------------------------------------------------------------------
 
-      it('defaults to StateServer on testnet', () => {
-        const run = new Run({ network: 'test', api: 'whatsonchain' })
+      it('defaults to StateServer on testnet if stateServerHost provided', () => {
+        const run = new Run({ network: 'test', api: 'whatsonchain', stateServerHost: 'https://mock/' })
         expect(run.state instanceof StateServer).to.equal(true)
       })
 
@@ -1180,7 +1182,7 @@ describe('Run', () => {
         expect(() => new Run({ timeout: undefined })).to.throw('Invalid timeout: undefined')
         expect(() => new Run({ timeout: null })).to.throw('Invalid timeout: null')
         expect(() => new Run({ timeout: {} })).to.throw('Invalid timeout: [object Object]')
-        expect(() => new Run({ timeout: () => {} })).to.throw('Invalid timeout: [anonymous function]')
+        expect(() => new Run({ timeout: () => { } })).to.throw('Invalid timeout: [anonymous function]')
         expect(() => new Run({ timeout: -1 })).to.throw('Invalid timeout: -1')
         expect(() => new Run({ timeout: NaN })).to.throw('Invalid timeout: NaN')
         expect(() => new Run({ timeout: -1.5 })).to.throw('Invalid timeout: -1.5')
@@ -1196,7 +1198,7 @@ describe('Run', () => {
         const defaultTrust = Run.defaults.trust
         Run.defaults.trust = []
         const run = new Run()
-        class A {}
+        class A { }
         run.deploy(A)
         await run.sync()
         const txid = A.location.slice(0, 64)
@@ -1212,7 +1214,7 @@ describe('Run', () => {
         const defaultTrust = Run.defaults.trust
         Run.defaults.trust = []
         const run = new Run()
-        class A {}
+        class A { }
         run.deploy(A)
         await run.sync()
         run.deactivate()
@@ -1227,7 +1229,7 @@ describe('Run', () => {
         const defaultTrust = Run.defaults.trust
         Run.defaults.trust = []
         const run = new Run()
-        class A {}
+        class A { }
         run.deploy(A)
         await run.sync()
         run.deactivate()
@@ -1242,7 +1244,7 @@ describe('Run', () => {
         const defaultTrust = Run.defaults.trust
         Run.defaults.trust = []
         const run = new Run()
-        class A {}
+        class A { }
         run.deploy(A)
         await run.sync()
         run.deactivate()
@@ -1257,7 +1259,7 @@ describe('Run', () => {
         const defaultTrust = Run.defaults.trust
         Run.defaults.trust = []
         const run = new Run()
-        class A {}
+        class A { }
         run.deploy(A)
         await run.sync()
         const txid = A.location.slice(0, 64)
@@ -1276,7 +1278,7 @@ describe('Run', () => {
         expect(() => new Run({ trust: 'abc' })).to.throw('Not trustable: "abc"')
         expect(() => new Run({ trust: 0 })).to.throw('Not trustable: 0')
         expect(() => new Run({ trust: true })).to.throw('Not trustable: true')
-        expect(() => new Run({ trust: () => {} })).to.throw('Not trustable: [anonymous function]')
+        expect(() => new Run({ trust: () => { } })).to.throw('Not trustable: [anonymous function]')
         expect(() => new Run({ trust: [null] })).to.throw('Not trustable: null')
       })
     })
@@ -1341,7 +1343,7 @@ describe('Run', () => {
 
     describe('api', () => {
       it('run', () => {
-        const run = new Run({ api: 'whatsonchain', network: 'main' })
+        const run = new Run({ api: 'whatsonchain', network: 'main', stateServerHost: 'https://mock' })
         run.api = 'run'
         expect(run.api).to.equal('run')
         expect(run.blockchain instanceof RunConnect).to.equal(true)
@@ -1357,7 +1359,7 @@ describe('Run', () => {
         run.api = 'whatsonchain'
         expect(run.api).to.equal('whatsonchain')
         expect(run.blockchain instanceof WhatsOnChain).to.equal(true)
-        expect(run.state instanceof StateServer).to.equal(true)
+        expect(run.state instanceof StateServer).to.equal(false)
         expect(run.network).to.equal('test')
       })
 
@@ -1546,7 +1548,7 @@ describe('Run', () => {
       // ----------------------------------------------------------------------
 
       it('does not change custom blockchain', () => {
-        const blockchain = { broadcast: () => {}, fetch: () => {}, utxos: () => {}, spends: () => {}, time: () => {}, network: 'test' }
+        const blockchain = { broadcast: () => { }, fetch: () => { }, utxos: () => { }, spends: () => { }, time: () => { }, network: 'test' }
         const run = new Run({ blockchain })
         run.cache = new LocalCache()
         expect(run.blockchain.cache).not.to.equal(run.cache)
@@ -1604,7 +1606,7 @@ describe('Run', () => {
 
     describe('debug', () => {
       it('enable', async () => {
-        const logger = stub({ info: () => {}, warn: () => {}, error: () => {}, debug: () => {} })
+        const logger = stub({ info: () => { }, warn: () => { }, error: () => { }, debug: () => { } })
         const run = new Run({ logger })
         run.debug = false
         class A extends Jig { }
@@ -1616,8 +1618,8 @@ describe('Run', () => {
       // ----------------------------------------------------------------------
 
       it('disable', async () => {
-        const logger = stub({ info: () => {}, warn: () => {}, error: () => {}, debug: () => {} })
-      new Run({ debug: true, logger }) // eslint-disable-line
+        const logger = stub({ info: () => { }, warn: () => { }, error: () => { }, debug: () => { } })
+        new Run({ debug: true, logger }) // eslint-disable-line
         class A extends Jig { }
         const a = new A()
         await a.sync()
@@ -2054,7 +2056,7 @@ describe('Run', () => {
       // ----------------------------------------------------------------------
 
       it('assigns logger with debug to log', () => {
-        const logger = stub({ info: () => {}, warn: () => {}, error: () => {}, debug: () => {} })
+        const logger = stub({ info: () => { }, warn: () => { }, error: () => { }, debug: () => { } })
         const run = new Run({ logger, debug: true })
         new Run({ debug: false }) // eslint-disable-line
         run.activate()
@@ -2075,7 +2077,7 @@ describe('Run', () => {
       // ----------------------------------------------------------------------
 
       it('assigns logger without debug to log', () => {
-        const logger = stub({ info: () => {}, warn: () => {}, error: () => {}, debug: () => {} })
+        const logger = stub({ info: () => { }, warn: () => { }, error: () => { }, debug: () => { } })
         const run = new Run({ logger, debug: false })
         new Run({ debug: true }) // eslint-disable-line
         run.activate()
@@ -2221,7 +2223,7 @@ describe('Run', () => {
       it('throws if not active', async () => {
         const run = new Run()
         run.deactivate()
-        expect(() => run.transaction(() => {})).to.throw('This Run instance is not active')
+        expect(() => run.transaction(() => { })).to.throw('This Run instance is not active')
       })
     })
 

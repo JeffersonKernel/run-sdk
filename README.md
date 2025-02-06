@@ -20,7 +20,7 @@ To give it a go, visit https://wiki.runcraft.io/ for tutorials and docs.
 ## Installation
 
 We recommend using `nvm` to have the proper node version. Run-SDK requires Node 16 or higher.
-Check with `node --version`, and for example switch with `nvm use 16.20.2`.
+Check with `node --version`, and for example switch with `nvm install 16 && nvm use 16`.
 
 Run `npm install` to install node dependencies.
 

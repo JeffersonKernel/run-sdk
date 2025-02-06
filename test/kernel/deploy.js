@@ -65,7 +65,7 @@ describe('Deploy', () => {
             op: 'DEPLOY',
             data: [
               'class A { }',
-              { deps: { } }
+              { deps: {} }
             ]
           }
         ]
@@ -107,7 +107,7 @@ describe('Deploy', () => {
             op: 'DEPLOY',
             data: [
               f.toString(),
-              { deps: { } }
+              { deps: {} }
             ]
           }
         ]
@@ -300,7 +300,7 @@ describe('Deploy', () => {
       const run = new Run()
 
       class A extends Jig { static f () { this.n = 1; this.o.m = 2 } }
-      A.o = { }
+      A.o = {}
 
       const CA = run.deploy(A)
       CA.f()
@@ -353,7 +353,7 @@ describe('Deploy', () => {
             op: 'DEPLOY',
             data: [
               'class A { }',
-              { deps: { } },
+              { deps: {} },
               'class B extends A { }',
               {
                 deps: {
@@ -407,7 +407,7 @@ describe('Deploy', () => {
             op: 'DEPLOY',
             data: [
               'class A { }',
-              { deps: { } },
+              { deps: {} },
               'class B extends A { }',
               {
                 deps: {
@@ -494,7 +494,7 @@ describe('Deploy', () => {
               'class B { }',
               {
                 A: { $jig: 1 },
-                deps: { }
+                deps: {}
               },
               'class A extends B { }',
               {
@@ -551,8 +551,8 @@ describe('Deploy', () => {
       class A { }
       Object.assign(A, props)
 
-      props = Object.assign({ deps: { } }, props)
-      encodedProps = Object.assign({ deps: { } }, encodedProps)
+      props = Object.assign({ deps: {} }, props)
+      encodedProps = Object.assign({ deps: {} }, encodedProps)
 
       expectTx({
         nin: 0,
@@ -729,7 +729,7 @@ describe('Deploy', () => {
       const props = {
         empty: {},
         basic: { a: 1, b: 2 },
-        nested: { o: { } },
+        nested: { o: {} },
         array: [{}],
         nullValue: null,
         dollar: { $und: 1 }
@@ -738,7 +738,7 @@ describe('Deploy', () => {
       const encodedProps = {
         empty: {},
         basic: { a: 1, b: 2 },
-        nested: { o: { } },
+        nested: { o: {} },
         array: [{}],
         nullValue: null,
         dollar: { $obj: { $und: 1 } }
@@ -872,7 +872,7 @@ describe('Deploy', () => {
               'class A { }',
               {
                 A: { $jig: 0 },
-                deps: { }
+                deps: {}
               }
             ]
           }
@@ -927,13 +927,13 @@ describe('Deploy', () => {
               'class A { }',
               {
                 B: { $jig: 1 },
-                deps: { },
+                deps: {},
                 f: { $jig: 2 }
               },
               B.toString(),
-              { deps: { } },
+              { deps: {} },
               f.toString(),
-              { deps: { } }
+              { deps: {} }
             ]
           }
         ]
@@ -976,7 +976,7 @@ describe('Deploy', () => {
             op: 'DEPLOY',
             data: [
               B.toString(),
-              { A: { $jig: 0 }, deps: { } }
+              { A: { $jig: 0 }, deps: {} }
             ]
           }
         ]
@@ -1022,12 +1022,12 @@ describe('Deploy', () => {
               'class A { }',
               {
                 B: { $jig: 1 },
-                deps: { }
+                deps: {}
               },
               'class B { }',
               {
                 A: { $jig: 0 },
-                deps: { }
+                deps: {}
               }
             ]
           }
@@ -1183,7 +1183,7 @@ describe('Deploy', () => {
               'class A { }',
               {
                 Berry: { $jig: 0 },
-                deps: { },
+                deps: {},
                 Jig: { $jig: 1 }
               }
             ]
@@ -1245,10 +1245,10 @@ describe('Deploy', () => {
     // ------------------------------------------------------------------------
 
     it('throws if extend intrinsics', () => {
-      expectPropFail(new (class MyArray extends Array {})())
-      expectPropFail(new (class MySet extends Set {})())
-      expectPropFail(new (class MyMap extends Map {})())
-      expectPropFail(new (class MyUint8Array extends Uint8Array {})())
+      expectPropFail(new (class MyArray extends Array { })())
+      expectPropFail(new (class MySet extends Set { })())
+      expectPropFail(new (class MyMap extends Map { })())
+      expectPropFail(new (class MyUint8Array extends Uint8Array { })())
     })
 
     // ------------------------------------------------------------------------
@@ -1284,7 +1284,7 @@ describe('Deploy', () => {
                 0: 3,
                 a: 2,
                 b: 1,
-                deps: { },
+                deps: {},
                 o: { c: 4, d: 5 }
               }
             ]
@@ -1343,7 +1343,7 @@ describe('Deploy', () => {
                 deps: { A: { $jig: 1 } }
               },
               A.toString(),
-              { deps: { } }
+              { deps: {} }
             ]
           }
         ]
@@ -1367,8 +1367,8 @@ describe('Deploy', () => {
       const run = new Run()
 
       class A {
-        static n () { return n } // eslint-disable-line
-        static o () { return o } // eslint-disable-line
+        static n() { return n } // eslint-disable-line
+        static o() { return o } // eslint-disable-line
       }
       A.deps = { n: 1, o: { a: [] } }
 
@@ -1434,7 +1434,7 @@ describe('Deploy', () => {
             op: 'DEPLOY',
             data: [
               'class A { }',
-              { deps: { } },
+              { deps: {} },
               'class B extends A { }',
               {
                 deps: { A: { $jig: 0 } }
@@ -1461,8 +1461,8 @@ describe('Deploy', () => {
     it('parent deps is not available on child', async () => {
       const run = new Run()
 
-      class B { static f () { return n } } // eslint-disable-line
-      class A extends B { static g () { return n } } // eslint-disable-line
+      class B { static f() { return n } } // eslint-disable-line
+      class A extends B { static g() { return n } } // eslint-disable-line
       B.deps = { n: 1 }
 
       function test (CA) {
@@ -1674,7 +1674,7 @@ describe('Deploy', () => {
                 deps: { h: { $jig: 1 } }
               },
               f.toString(),
-              { deps: { } }
+              { deps: {} }
             ]
           }
         ]
@@ -1716,7 +1716,7 @@ describe('Deploy', () => {
       expect(() => run.deploy(A)).to.throw()
       A.deps = []
       expect(() => run.deploy(A)).to.throw()
-      A.deps = new class Deps {}()
+      A.deps = new class Deps { }()
       expect(() => run.deploy(A)).to.throw()
     })
 
@@ -1778,7 +1778,7 @@ describe('Deploy', () => {
 
     it('throws if deps is getter', () => {
       const run = new Run()
-      class A { get deps () { return { } } }
+      class A { get deps () { return {} } }
       expect(() => run.deploy(A)).to.throw('Getters and setters not supported')
     })
   })
@@ -2059,7 +2059,7 @@ describe('Deploy', () => {
       expect(() => run.deploy(A)).to.throw()
       A.presets = []
       expect(() => run.deploy(A)).to.throw()
-      A.presets = { [network]: new class Presets {}() }
+      A.presets = { [network]: new class Presets { }() }
       expect(() => run.deploy(A)).to.throw()
     })
 
@@ -2124,7 +2124,7 @@ describe('Deploy', () => {
                 a: 1,
                 b: 2,
                 c: 3,
-                deps: { }
+                deps: {}
               }
             ]
           }
@@ -2254,8 +2254,8 @@ describe('Deploy', () => {
     it('throws if anonymous', () => {
       const run = new Run()
       const error = 'Anonymous types not supported'
-      expect(() => run.deploy(() => {})).to.throw(error)
-      expect(() => run.deploy(class {})).to.throw(error)
+      expect(() => run.deploy(() => { })).to.throw(error)
+      expect(() => run.deploy(class { })).to.throw(error)
       const g = function () { }
       expect(() => run.deploy(g)).to.throw(error)
       const A = class { }
@@ -2313,9 +2313,9 @@ describe('Deploy', () => {
     it('throws if accessors', () => {
       const run = new Run()
       class A { static get x () { } }
-      class B { static set x (value) { } } // eslint-disable-line
+      class B { static set x(value) { } } // eslint-disable-line
       class C { get x () { } }
-      class D { set x (value) { } } // eslint-disable-line
+      class D { set x(value) { } } // eslint-disable-line
       const error = 'Getters and setters not supported'
       expect(() => run.deploy(A)).to.throw(error)
       expect(() => run.deploy(B)).to.throw(error)
