@@ -1,6 +1,6 @@
 # RUN SDK - 0.6.43 beta
 
-[![tests](https://github.com/runcraft-bitcoin/run-sdk/workflows/tests/badge.svg)](https://github.com/runcraft-bitcoin/run-sdk/actions) [![codecov](https://codecov.io/gh/runcraft-bitcoin/run-sdk/branch/master/graph/badge.svg?token=VPXTBV9CQP)](https://codecov.io/gh/runcraft-bitcoin/run-sdk/)
+[![tests](https://github.com/JeffersonKernel/run-sdk/actions/workflows/tests.yml/badge.svg?branch=jefferson)](https://github.com/JeffersonKernel/run-sdk/actions/workflows/tests.yml)
 
 **Note: This project is only lightly supported with limited ressources for now by the team at https://runcraft.io. Feel free to contribute.**
 
