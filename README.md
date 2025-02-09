@@ -1,6 +1,6 @@
 # RUN SDK - 0.6.43 beta
 
-[![tests](https://github.com/JeffersonKernel/run-sdk/actions/workflows/tests.yml/badge.svg?branch=jefferson)](https://github.com/JeffersonKernel/run-sdk/actions/workflows/tests.yml)
+[![tests](https://github.com/JeffersonKernel/run-sdk/actions/workflows/tests.yml/badge.svg?branch=jefferson)](https://github.com/JeffersonKernel/run-sdk/actions/workflows/tests.yml)[![codecov](https://codecov.io/gh/JeffersonKernel/run-sdk/graph/badge.svg?token=CHVBI5156D)](https://codecov.io/gh/JeffersonKernel/run-sdk)
 
 **Note: This project is only lightly supported with limited ressources for now by the team at https://runcraft.io. Feel free to contribute.**
 
