@@ -1,4 +1,4 @@
-# RUN SDK - 0.6.42 beta
+# RUN SDK - 0.6.43 beta
 
 [![tests](https://github.com/runcraft-bitcoin/run-sdk/workflows/tests/badge.svg)](https://github.com/runcraft-bitcoin/run-sdk/actions) [![codecov](https://codecov.io/gh/runcraft-bitcoin/run-sdk/branch/master/graph/badge.svg?token=VPXTBV9CQP)](https://codecov.io/gh/runcraft-bitcoin/run-sdk/)
 
@@ -10,6 +10,18 @@ RUN is a token protocol to build whatever you dream up. A world of interactive a
 To give it a go, visit https://wiki.runcraft.io/ for tutorials and docs.
 
 ## Versions and migrations
+
+### version 0.6.43b
+
+- fix the default api to whatsonchain
+
+- fix test:browser (to run test:browser you need to install these packages: apt-get install default-jre chromium-driver)
+- update most of libs to latest
+- adding a wrapper to use latest chaiversion  which went full ESM
+- correction of some function to comply with latest eslint/standard requirements
+- adding an infinite loop protection in deploy.js (function removeCircularReferences)
+
+- upgrade to node 20
 
 ### version 0.6.42
 

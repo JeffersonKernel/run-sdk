@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * trust.js
  *
@@ -5,8 +6,9 @@
  */
 
 const { describe, it, afterEach } = require('mocha')
-require('chai').use(require('chai-as-promised'))
-const { expect } = require('chai')
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const Run = require('../env/run')
 const { Jig } = Run
 const { LocalCache } = Run.plugins

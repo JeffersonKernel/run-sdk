@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * local-owner.js
  *
@@ -5,8 +6,9 @@
  */
 
 const { describe, it, afterEach } = require('mocha')
-require('chai').use(require('chai-as-promised'))
-const { expect } = require('chai')
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const bsv = require('bsv')
 const { Address, PrivateKey, PublicKey, Transaction } = bsv
 const { COVER } = require('../env/config')

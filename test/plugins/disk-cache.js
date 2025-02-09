@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * disk-cache.js
  *
@@ -5,7 +6,9 @@
  */
 
 const { describe, it, afterEach } = require('mocha')
-const { expect } = require('chai')
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const { stub } = require('sinon')
 const fs = require('fs')
 const path = require('path')

@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * proxy2.js
  *
@@ -5,7 +6,9 @@
  */
 
 const { describe, it } = require('mocha')
-const { expect } = require('chai')
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const { spy } = require('sinon')
 const Run = require('../env/run')
 const unmangle = require('../env/unmangle')
@@ -353,20 +356,20 @@ describe('Proxy2', () => {
       const h = handler()
       const p = new Proxy2(new Uint8Array([1, 2, 3]), h)
       p.entries()
-      p.every(() => {})
-      p.filter(() => {})
-      p.find(() => {})
-      p.findIndex(() => {})
-      p.forEach(() => {})
+      p.every(() => { return undefined })
+      p.filter(() => { return undefined })
+      p.find(() => { return undefined })
+      p.findIndex(() => { return undefined })
+      p.forEach(() => { return undefined })
       p.includes()
       p.indexOf(0)
       p.lastIndexOf(0)
       p.join()
       p.keys()
-      p.map(() => {})
-      p.reduce(() => {})
-      p.reduceRight(() => {})
-      p.some(() => {})
+      p.map(() => { return undefined })
+      p.reduce(() => { return undefined })
+      p.reduceRight(() => { return undefined })
+      p.some(() => { return undefined })
       p.subarray()
       p.toLocaleString()
       p.toString()

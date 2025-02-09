@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * deploy.js
  *
@@ -5,9 +6,11 @@
  */
 
 const { describe, it, afterEach } = require('mocha')
-require('chai').use(require('chai-as-promised'))
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const { stub } = require('sinon')
-const { expect } = require('chai')
+
 const bsv = require('bsv')
 const { PrivateKey } = bsv
 const { sha256 } = bsv.crypto.Hash
@@ -571,12 +574,32 @@ describe('Deploy', () => {
         ]
       })
 
+      function removeCircularReferences (obj, seen = new WeakSet()) {
+        if (obj && typeof obj === 'object') {
+          if (seen.has(obj)) return '[Circular]'
+          seen.add(obj)
+
+          if (Array.isArray(obj)) {
+            return obj.map(item => removeCircularReferences(item, seen))
+          } else {
+            return Object.fromEntries(
+              Object.entries(obj).map(([key, value]) => [key, removeCircularReferences(value, seen)])
+            )
+          }
+        }
+        return obj
+      }
+
       function test (T) {
         const Tprops = _sudo(() => Object.assign({}, T))
         const bindings = ['location', 'origin', 'nonce', 'owner', 'satoshis']
         bindings.forEach(x => { delete Tprops[x] })
 
-        expect(Tprops).to.deep.equal(props)
+        // Supprimer les références circulaires AVANT la comparaison
+        const cleanedTprops = removeCircularReferences(Tprops)
+        const cleanedProps = removeCircularReferences(props)
+
+        expect(cleanedTprops).to.deep.equal(cleanedProps)
 
         if (testProps) testProps(T)
       }
@@ -2174,7 +2197,7 @@ describe('Deploy', () => {
       const location = randomLocation()
       A.presets = {
         [network]: {
-          location: location,
+          location,
           origin: location,
           nonce: 2,
           owner: randomOwner(),

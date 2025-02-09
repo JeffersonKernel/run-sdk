@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * run.js
  *
@@ -5,9 +6,11 @@
  */
 
 const { describe, it, afterEach } = require('mocha')
-require('chai').use(require('chai-as-promised'))
+const chai = require('./chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const { stub } = require('sinon')
-const { expect } = require('chai')
+
 const bsv = require('bsv')
 const Run = require('./env/run')
 const unmangle = require('./env/unmangle')

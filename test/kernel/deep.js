@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * deep.js
  *
@@ -5,8 +6,11 @@
  */
 
 const { describe, it } = require('mocha')
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const { fake, stub } = require('sinon')
-const { expect } = require('chai')
+
 const Run = require('../env/run')
 const { Jig, Berry } = Run
 const unmangle = require('../env/unmangle')

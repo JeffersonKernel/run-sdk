@@ -40,9 +40,9 @@ async function runTests () {
   const browser = process.env.BROWSER || 'chrome'
 
   // Headless mode is required in Linux VMs on Github Actions
-  const chromeOptions = new chrome.Options().headless()
-  const firefoxOptions = new firefox.Options().headless()
-  const edgeOptions = new edge.Options().headless()
+  const chromeOptions = new chrome.Options().addArguments('--headless')
+  const firefoxOptions = new firefox.Options().addArguments('--headless')
+  const edgeOptions = new edge.Options().addArguments('--headless')
 
   // Start the browser
   const driver = await new webdriver.Builder()

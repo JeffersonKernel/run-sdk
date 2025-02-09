@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * state-filter.js
  *
@@ -5,7 +6,9 @@
  */
 
 const { describe, it } = require('mocha')
-const { expect } = require('chai')
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const unmangle = require('../env/unmangle')
 const Run = require('../env/run')
 const StateFilter = unmangle(Run)._StateFilter

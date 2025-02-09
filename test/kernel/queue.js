@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * queue.js
  *
@@ -5,10 +6,12 @@
  */
 
 const { describe, it } = require('mocha')
-require('chai').use(require('chai-as-promised'))
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const Run = require('../env/run')
 const unmangle = require('../env/unmangle')
-const { expect } = require('chai')
+
 const { _SerialTaskQueue } = unmangle(Run)
 
 // ------------------------------------------------------------------------------------------------

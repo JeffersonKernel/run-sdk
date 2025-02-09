@@ -1,3 +1,4 @@
+/* global expect */
 /**
  * node-cache.js
  *
@@ -5,7 +6,9 @@
  */
 
 const { describe, it, beforeEach, afterEach } = require('mocha')
-const { expect } = require('chai')
+const chai = require('../chai-wrapper.js')
+chai.then(loadedChai => { global.expect = loadedChai.expect; global.assert = loadedChai.assert })
+
 const { spy } = require('sinon')
 const Run = require('../env/run')
 const { BROWSER } = require('../env/config')

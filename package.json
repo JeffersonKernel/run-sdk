@@ -3,8 +3,8 @@
   "version": "0.6.43",
   "description": "Run SDK",
   "license": "MIT",
-  "main": "dist/run.node.min.js",
-  "browser": "dist/run.browser.min.js",
+  "main": "dist/run.0.6.43.node.min.js",
+  "browser": "dist/run.0.6.43.browser.min.js",
   "files": [
     "dist/**.min.js"
   ],
@@ -14,7 +14,7 @@
     "build": "webpack",
     "test": "env LIB=lib mocha",
     "test:cover": "env LIB=lib env COVER=1 nyc --clean=${CLEAN:=true} -r=text -r=lcovonly -x=test/** mocha",
-    "test:node": "webpack && env LIB=dist/run.node.min.js env MANGLED=1 mocha",
+    "test:node": "webpack && env LIB=dist/run.0.6.43.node.min.js env MANGLED=1 mocha",
     "test:browser": "node test/env/browser"
   },
   "dependencies": {
@@ -29,18 +29,18 @@
     ]
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-as-promised": "^7.1.1",
-    "dotenv": "^8.2.0",
-    "fs-extra": "^9.0.1",
-    "glob": "^7.1.6",
-    "jsdom": "^16.4.0",
-    "mocha": "^8.1.3",
-    "node-fetch": "^2.6.1",
-    "nyc": "^15.1.0",
+    "chai": "^5.1.2",
+    "chai-as-promised": "^8.0.1",
+    "dotenv": "^16.4.7",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.1",
+    "jsdom": "^26.0.0",
+    "mocha": "^11.1.0",
+    "node-fetch": "^3.3.2",
+    "nyc": "^17.1.0",
     "selenium-webdriver": "^4.0.0-alpha.7",
     "sinon": "^9.2.0",
-    "standard": "^14.3.4",
+    "standard": "^17.1.2",
     "terser-webpack-plugin": "^4.2.3",
     "txo": "0.0.21",
     "webpack": "^4.44.2",

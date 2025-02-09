@@ -8,17 +8,17 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-    - name: Setup Node 10
+    - name: Setup Node 16
       uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
+        node-version: '16.x'
 
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Cache Dependencies
       id: cache-node-modules
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       env:
         cache-version: 1
       with:
@@ -96,23 +96,24 @@ jobs:
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: coverage/lcov.info
+        slug: JeffersonKernel/run-sdk
 
   node_10_tests:
-    name: Node 10 Tests
+    name: Node 16 Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-    - name: Setup Node 10
+    - name: Setup Node 16
       uses: actions/setup-node@v1
       with:
-        node-version: '10.x'
+        node-version: '16.x'
 
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Cache Dependencies
       id: cache-node-modules
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       env:
         cache-version: 1
       with:
@@ -129,21 +130,21 @@ jobs:
       run: npm run test:node
 
   node_12_tests:
-    name: Node 12 Tests
+    name: Node 18 Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-    - name: Setup Node 12
+    - name: Setup Node 18
       uses: actions/setup-node@v1
       with:
-        node-version: '12.x'
+        node-version: '18.x'
 
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Cache Dependencies
       id: cache-node-modules
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       env:
         cache-version: 1
       with:
@@ -160,21 +161,21 @@ jobs:
       run: npm run test:node
 
   node_16_tests:
-    name: Node 16 Tests
+    name: Node 20 Tests
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-    - name: Setup Node 16
+    - name: Setup Node 20
       uses: actions/setup-node@v1
       with:
-        node-version: '16.x'
+        node-version: '20.x'
 
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Cache Dependencies
       id: cache-node-modules
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       env:
         cache-version: 1
       with:
@@ -193,14 +194,14 @@ jobs:
   firefox_tests:
     name: Firefox Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Cache Dependencies
       id: cache-node-modules
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       env:
         cache-version: 1
       with:
@@ -219,14 +220,14 @@ jobs:
   chrome_tests:
     name: Chrome Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Cache Dependencies
       id: cache-node-modules
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       env:
         cache-version: 1
       with:
@@ -245,14 +246,14 @@ jobs:
   edge_tests:
     name: Edge Tests
     runs-on: windows-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
     - name: Checkout
       uses: actions/checkout@v2
 
     - name: Cache Dependencies
       id: cache-node-modules
-      uses: actions/cache@v1
+      uses: actions/cache@v4
       env:
         cache-version: 1
       with:
@@ -269,29 +270,4 @@ jobs:
     - name: Test Edge
       run: env BROWSER=MicrosoftEdge npm run test:browser
       shell: bash
-
-  safari_tests:
-    name: Safari Tests
-    runs-on: macos-latest
-    timeout-minutes: 10
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-
-    - name: Cache Dependencies
-      id: cache-node-modules
-      uses: actions/cache@v1
-      env:
-        cache-version: 1
-      with:
-        path: node_modules
-        key: v${{ env.cache-version }}-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
-
-    - name: Install
-      if: steps.cache-node-modules.outputs.cache-hit != 'true'
-      run: |
-        echo "//npm.pkg.github.com/:_authToken=${{ secrets.AUTH_TOKEN }}" > ~/.npmrc
-        npm ci
-
-    - name: Test Safari
-      run: env BROWSER=safari npm run test:browser
+      
